@@ -1,0 +1,45 @@
+name: 每3小时自动刷新外商投资动态
+
+# 触发方式：①定时（每3小时，UTC时间）②手动点按钮触发
+on:
+  schedule:
+    - cron: "0 */3 * * *"   # 每 3 小时整点跑一次（GitHub 用 UTC 时间）
+  workflow_dispatch: {}       # 允许在 Actions 页面手动点“Run workflow”
+
+# 允许工作流把抓到的新数据提交回仓库
+permissions:
+  contents: write
+
+# 避免两次运行同时提交产生冲突
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库代码
+        uses: actions/checkout@v4
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 运行爬虫抓取最新动态
+        run: |
+          python crawler.py --max 20 || echo "抓取步骤出现异常，继续尝试提交已有变更"
+
+      - name: 提交并推送更新后的数据
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.json data.js auto_items.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "本次没有数据变化，跳过提交"
+          else
+            git commit -m "auto: 每3小时刷新外商投资动态数据"
+            git push
+            echo "已提交并推送最新数据，GitHub Pages 将自动重新发布"
+          fi

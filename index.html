@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>南京市外商投资动态监测平台</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <!-- 左侧导航 -->
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="logo_white.png" alt="南京商务" class="brand-logo">
+        <div class="brand-text">
+          <div class="brand-title">外商投资动态监测</div>
+          <div class="brand-sub">南京市商务局-外国投资管理处</div>
+        </div>
+      </div>
+      <nav class="nav" id="nav">
+        <a class="nav-item active" data-module="overview"><span class="nav-ico">◧</span>总览</a>
+        <a class="nav-item" data-module="investment"><span class="nav-ico">▣</span>外商来华投资动态</a>
+        <a class="nav-item" data-module="jiangsu"><span class="nav-ico">◈</span>外商来苏投资动态</a>
+        <a class="nav-item" data-module="exchange"><span class="nav-ico">⇄</span>来华考察·经贸交流</a>
+        <a class="nav-item" data-module="industry"><span class="nav-ico">✦</span>四大攻坚产业动态</a>
+        <a class="nav-item" data-module="policy"><span class="nav-ico">❏</span>各级外商投资政策文件</a>
+      </nav>
+      <div class="sidebar-foot">
+        <div>数据更新</div>
+        <div id="updated-at" class="updated-at">加载中…</div>
+        <div class="schedule-note">每 3 小时自动更新</div>
+      </div>
+    </aside>
+
+    <!-- 主区 -->
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-title" id="module-title">总览</div>
+        <div class="topbar-right">
+          <button class="refresh-btn" id="refresh-btn" title="重新拉取服务器上的最新数据（绕过浏览器缓存）">
+            <span class="refresh-ico">⟳</span><span class="refresh-txt">检查更新</span>
+          </button>
+          <div class="topbar-org">南京市商务局-外国投资管理处</div>
+        </div>
+      </header>
+      <section class="content" id="content"><!-- 由 app.js 渲染 --></section>
+    </main>
+  </div>
+  <!-- data.js 优先加载：本地双击打开(file://)也能正常取数；服务器部署时 fetch data.json 同样可用 -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

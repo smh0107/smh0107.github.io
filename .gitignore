@@ -1,0 +1,13 @@
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 临时/中间文件
+_refresh_batch.json
+_repo.json
+*.bak
+data.json.bak
+logo_preview.png
+
+# 内部工作数据（不发布到公开仓库）
+.workbuddy/
