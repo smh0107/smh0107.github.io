@@ -257,55 +257,40 @@ function applyFilters(items) {
 /* ============ 总览 ============ */
 function renderOverview(c) {
   const items = DATA.items.slice().sort(byDateDesc);
-  const countries = uniq(items.map(i => i.country)).length;
-  const jsCount = items.filter(i => i.is_jiangsu).length;
   const exCount = items.filter(i => i.category === 'exchange').length;
+  const invCount = items.length - exCount;
 
   c.innerHTML =
-    '<div class="kpi-row">' +
-    kpi(items.length, '动态总数', false) +
-    kpi(countries, '来源国家/地区', false) +
-    kpi(jsCount, '江苏相关动态', false) +
-    kpi(exCount, '考察·经贸活动', false) +
-    '</div>' +
-
-    /* AI 研判窗口（总览） */
+    /* AI 研判窗口（总览，置于页面最上方） */
     renderAiInsight('overview') +
 
-    /* 第一行：重点信息轮播（缩小）+ 外商动态热力图 */
-    '<div class="grid-2 ov-row">' +
+    /* 第一行：重点信息轮播（缩小）+ 外商动态中国地图热力图 */
+    '<div class="grid-2 ov-row stretch">' +
       '<div class="ov-cell">' + buildCarousel(items.filter(isKeyInfo).sort(byDateDesc).slice(0, 5)) + '</div>' +
       '<div class="ov-cell">' + buildHeatmap(items) + '</div>' +
     '</div>' +
 
-    /* 第二行：活动类型分布（环图）+ 月度趋势（面积图，非柱状） */
-    '<div class="grid-2 ov-row">' +
-      '<div class="panel"><div class="cell-head"><span class="cell-tag">活动类型分布</span></div>' +
-        donut([
-          { label: '投资落地/增资/总部/研发', value: items.filter(i => i.category === 'investment').length, color: '#15395f' },
-          { label: '考察/经贸/参会/论坛', value: exCount, color: '#c8102e' }
-        ]) + '</div>' +
-      '<div class="panel"><div class="cell-head"><span class="cell-tag">近 6 个月动态趋势</span></div>' +
-        buildTrend(items) + '</div>' +
-    '</div>' +
-
-    /* 第三行：来源国家 TOP + 行业分布 TOP */
+    /* 第二行：来源国家/地区 TOP + 活动类型分布 */
     '<div class="grid-2 ov-row">' +
       '<div class="panel"><div class="cell-head"><span class="cell-tag">来源国家/地区 TOP</span></div>' +
         barChart(sourceCounts(items).slice(0, 8)) + '</div>' +
-      '<div class="panel"><div class="cell-head"><span class="cell-tag">行业分布 TOP</span></div>' +
-        barChart(topCount(items.filter(i => i.industry), 'industry', 8)) + '</div>' +
+      '<div class="panel"><div class="cell-head"><span class="cell-tag">活动类型分布</span></div>' +
+        donut([
+          { label: '投资落地/增资/总部/研发', value: invCount, color: '#15395f' },
+          { label: '考察/经贸/参会/论坛', value: exCount, color: '#c8102e' }
+        ]) + '</div>' +
     '</div>' +
 
-    /* 第四行：江苏相关动态·城市 TOP（13 市全覆盖） */
-    '<div class="panel ov-row"><div class="cell-head"><span class="cell-tag">江苏相关动态 · 城市分布</span></div>' +
-      barChart(topCount(items.filter(i => i.is_jiangsu), 'city', 13)) + '</div>' +
+    /* 第三行：行业分布 TOP（整行） */
+    '<div class="panel ov-row"><div class="cell-head"><span class="cell-tag">行业分布 TOP</span></div>' +
+      barChart(topCount(items.filter(i => i.industry), 'industry', 8)) + '</div>' +
 
     '<div class="section-title"><span class="bar"></span>最新动态</div>' +
     '<div class="feed">' + items.slice(0, PAGE_SIZE).map(itemCard).join('') + '</div>' +
     pager(items.length);
 
   initCarousel();
+  initHeatmap();
 }
 
 /* 轮播：精选动态自动轮动，带左右箭头与圆点；支持 item.image（无图时行业渐变兜底） */
@@ -346,7 +331,8 @@ function buildCarousel(featured) {
       '</div></div>';
   }).join('');
   const dots = featured.map((_, i) => '<span class="c-dot' + (i === 0 ? ' active' : '') + '" data-i="' + i + '"></span>').join('');
-  return '<div class="feat-wrap"><span class="cell-tag hot">重点信息</span>' +
+  return '<div class="feat-wrap">' +
+    '<div class="cell-head"><span class="cell-tag hot">重点信息</span></div>' +
     '<div class="carousel compact' + (featured.length <= 1 ? ' single' : '') + '" id="carousel">' + slides +
     '<button class="carrow prev" id="cprev" aria-label="上一条">‹</button>' +
     '<button class="carrow next" id="cnext" aria-label="下一条">›</button>' +
@@ -434,58 +420,50 @@ function provShort(p) {
   return map[p] || p;
 }
 function heatColor(v, max) {
-  if (!v || !max) return '#eef2f7';
-  const t = Math.min(1, v / max);
-  const a = [233, 238, 245], b = [14, 42, 71];
+  if (!max) return '#eef1f6';
+  const t = Math.pow(Math.min(1, v / max), 0.65);
+  const a = [247, 222, 222], b = [122, 12, 12];
   const r = Math.round(a[0] + (b[0] - a[0]) * t);
   const g = Math.round(a[1] + (b[1] - a[1]) * t);
   const bl = Math.round(a[2] + (b[2] - a[2]) * t);
   return 'rgb(' + r + ',' + g + ',' + bl + ')';
 }
 function buildHeatmap(items) {
+  const CM = window.CHINA_MAP;
+  if (!CM || !CM.provinces) return '<div class="empty"><p>地图数据缺失</p></div>';
   const counts = {};
   items.forEach(i => {
     const s = provShort(i.province);
-    if (s && TILE_LAYOUT[s]) counts[s] = (counts[s] || 0) + 1;
+    if (s) counts[s] = (counts[s] || 0) + 1;
   });
   const max = Math.max(1, ...Object.values(counts));
-  const tiles = Object.keys(TILE_LAYOUT).map(name => {
-    const pos = TILE_LAYOUT[name];
-    const v = counts[name] || 0;
-    const bg = heatColor(v, max);
-    const txt = v / max > 0.55 ? '#fff' : '#1f2d3d';
-    return '<div class="htile" title="' + esc(name) + (v ? ('：' + v + ' 条') : '：暂无') +
-      '" style="grid-column:' + (pos[0] + 1) + ';grid-row:' + (pos[1] + 1) +
-      ';background:' + bg + ';color:' + txt + '">' + esc(name) + '</div>';
+  const paths = CM.provinces.map(p => {
+    const v = counts[p.short] || 0;
+    return '<path class="cm-prov" d="' + p.d + '" fill="' + heatColor(v, max) +
+      '" fill-rule="evenodd" stroke="#ffffff" stroke-width="0.5" ' +
+      'data-name="' + esc(p.name) + '" data-count="' + v + '"></path>';
   }).join('');
-  return '<div class="cell-head"><span class="cell-tag heat">外商动态热力图</span>' +
-    '<span class="cell-sub">颜色越深，相关信息越多</span></div>' +
-    '<div class="heatmap">' + tiles + '</div>';
+  return '<div class="cell-head"><span class="cell-tag heat">外商动态热力图</span></div>' +
+    '<div class="china-map"><svg viewBox="' + CM.viewBox + '" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block">' +
+    paths + '</svg><div class="map-tip" id="map-tip"></div></div>';
+}
+function initHeatmap() {
+  const wrap = document.querySelector('.china-map');
+  if (!wrap) return;
+  const tip = wrap.querySelector('#map-tip');
+  wrap.querySelectorAll('.cm-prov').forEach(el => {
+    el.addEventListener('mousemove', e => {
+      tip.innerHTML = '<b>' + el.dataset.name + '</b>　' + el.dataset.count + ' 条';
+      const r = wrap.getBoundingClientRect();
+      let x = e.clientX - r.left + 14, y = e.clientY - r.top + 14;
+      if (x + tip.offsetWidth > r.width) x = e.clientX - r.left - tip.offsetWidth - 14;
+      tip.style.left = x + 'px'; tip.style.top = y + 'px'; tip.style.opacity = 1;
+    });
+    el.addEventListener('mouseleave', () => { tip.style.opacity = 0; });
+  });
 }
 
-/* ============ 月度趋势（SVG 面积图，非柱状）============ */
-function buildTrend(items) {
-  const mset = {};
-  items.forEach(i => { const m = (i.date || '').slice(0, 7); if (m) mset[m] = (mset[m] || 0) + 1; });
-  let months = Object.keys(mset).sort().slice(-6);
-  if (months.length < 2) return '<div class="empty"><p>暂无足够时序数据</p></div>';
-  const vals = months.map(m => mset[m]);
-  const max = Math.max(...vals, 1);
-  const W = 520, H = 150, pad = 26, n = months.length;
-  const x = i => pad + i * (W - 2 * pad) / (n - 1);
-  const y = v => H - pad - v / max * (H - 2 * pad);
-  const pts = vals.map((v, i) => [x(i), y(v)]);
-  const line = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
-  const area = line + ' L' + x(n - 1).toFixed(1) + ' ' + (H - pad) + ' L' + x(0).toFixed(1) + ' ' + (H - pad) + ' Z';
-  const dots = pts.map(p => '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="3.4" fill="#c8102e"/>').join('');
-  const labels = months.map((m, i) => '<text x="' + x(i).toFixed(1) + '" y="' + (H - 7) + '" font-size="10" fill="#6b7a8d" text-anchor="middle">' + m.slice(5) + '月</text>').join('');
-  return '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block">' +
-    '<path d="' + area + '" fill="rgba(200,16,46,0.12)"/>' +
-    '<path d="' + line + '" fill="none" stroke="#c8102e" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>' +
-    dots + labels + '</svg>';
-}
-
-/* 头部跨国公司 & 全球动态 列表 */
+/* ============ 头部跨国公司 & 全球动态 列表 ============ */
 function mncList(list) {
   if (!list || !list.length) return '<div class="empty"><p>暂无头部公司数据</p></div>';
   return list.map(c =>
@@ -505,13 +483,16 @@ function renderList(c, opts) {
   if (opts.jiangsu) base = base.filter(i => i.is_jiangsu);
 
   const scope = opts.jiangsu ? 'jiangsu' : (opts.category === 'exchange' ? 'exchange' : 'investment');
+  const sideTitle = opts.jiangsu ? '来苏投资' : (opts.category === 'exchange' ? '考察经贸' : '来华投资');
 
   const wrap = document.createElement('div');
   wrap.innerHTML = filterBar({ base, citySelect: opts.citySelect }) +
-    renderAiInsight(scope) +
     '<div class="grid-2"><div><div class="feed" id="feed"></div></div>' +
-    '<div class="panel"><h3>' + (opts.jiangsu ? '来苏投资' : (opts.category === 'exchange' ? '考察经贸' : '来华投资')) + '统计</h3>' +
-    '<div id="stats"></div></div></div>' +
+    '<div class="panel" id="side">' +
+      renderAiInsight(scope, true) +
+      '<h3>' + sideTitle + '统计</h3>' +
+      '<div id="stats"></div>' +
+    '</div></div>' +
     '<div id="pg"></div>';
   c.appendChild(wrap);
 
@@ -523,10 +504,14 @@ function renderList(c, opts) {
     document.getElementById('pg').innerHTML = pager(filtered.length);
     const indRows = topCount(filtered, 'industry', 6);
     const srcRows = sourceCounts(filtered);
-    document.getElementById('stats').innerHTML =
-      (indRows.length ? barChart(indRows) : barChart([{ label: '（无行业标注）', value: 0 }])) +
+    let html = (indRows.length ? barChart(indRows) : barChart([{ label: '（无行业标注）', value: 0 }])) +
       '<div style="margin-top:14px"><h3 style="font-size:13px;color:var(--navy);margin-bottom:8px">来源国家/地区</h3>' +
       (srcRows.length ? barChart(srcRows) : '<div class="empty"><p>暂无来源数据</p></div>') + '</div>';
+    if (opts.jiangsu) {
+      html += '<div style="margin-top:14px"><h3 style="font-size:13px;color:var(--navy);margin-bottom:8px">江苏城市分布</h3>' +
+        barChart(topCount(filtered, 'city', 13), true) + '</div>';
+    }
+    document.getElementById('stats').innerHTML = html;
   }
   bindFilters(refresh);
   refresh();
@@ -543,13 +528,15 @@ function renderIndustry(c) {
   }).join('');
 
   const intel = (DATA.industry_intel && DATA.industry_intel[state.industry]) || { companies: [], analysis: '' };
+  const t = (intel.generated_at || '').replace('T', ' ');
   const wrap = document.createElement('div');
   wrap.innerHTML = '<div class="ind-cards">' + cards + '</div>' +
     '<div class="grid-2"><div><div class="feed" id="feed"></div></div>' +
     '<div class="panel" id="intel-panel">' +
       '<div class="cell-head"><span class="cell-tag">头部跨国公司 · 全球动态</span></div>' +
       '<div id="mnc-list"></div>' +
-      '<div class="cell-head" style="margin-top:16px"><span class="cell-tag">产业研判（面向南京攻坚）</span></div>' +
+      '<div class="cell-head" style="margin-top:16px"><span class="cell-tag ai">产业研判 · AI 生成</span>' +
+      (t ? '<span class="ai-time">生成于 ' + esc(t) + '</span>' : '') + '</div>' +
       '<div id="intel-analysis" class="intel-analysis"></div>' +
       '<div class="cell-head" style="margin-top:16px"><span class="cell-tag">来源国家/地区</span></div>' +
       '<div id="stats"></div>' +
@@ -653,12 +640,12 @@ function policyCard(p) {
 /* ============ AI 研判窗口 ============ */
 /* 读取 data.json 顶层 ai_insights：{ generated_at, overview, investment, jiangsu, exchange }
    标注“AI研判”+生成时间；内容为按周自动生成的研判文本。 */
-function renderAiInsight(scope) {
+function renderAiInsight(scope, inline) {
   const ai = (DATA && DATA.ai_insights) || {};
   const text = ai[scope];
   if (!text) return '';
   const t = (ai.generated_at || '').replace('T', ' ');
-  return '<div class="ai-insight">' +
+  return '<div class="ai-insight' + (inline ? ' inline' : '') + '">' +
     '<div class="ai-head"><span class="ai-badge">✦ AI 研判</span>' +
     (t ? '<span class="ai-time">生成于 ' + esc(t) + '</span>' : '') + '</div>' +
     '<div class="ai-body">' + esc(text) + '</div></div>';
