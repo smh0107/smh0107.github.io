@@ -127,6 +127,37 @@ def compose_exchange(stats):
     )
 
 
+INDUSTRIES = ['人工智能(软件)', '机器人', '生物医药', '新一代信息通信']
+IND_REF = {
+    '人工智能(软件)': ['英伟达', '微软', '亚马逊'],
+    '机器人': ['ABB', '库卡', '发那科', '安川'],
+    '生物医药': ['阿斯利康', '诺华', '礼来', '罗氏', '赛诺菲'],
+    '新一代信息通信': ['高通', '爱立信', '诺基亚', '三星'],
+}
+
+
+def industry_stats(d, name):
+    items = [i for i in d.get('items', []) if i.get('industry') == name]
+    inv = sum(1 for i in items if i.get('category') == 'investment')
+    js = [i for i in items if i.get('is_jiangsu')]
+    return {
+        'n': len(items), 'inv': inv, 'ex': len(items) - inv,
+        'countries': topn(items, 'country', 3),
+        'js_cities': topn(js, 'city', 3),
+    }
+
+
+def compose_industry(name, st):
+    mncs = '、'.join(IND_REF.get(name, []))
+    return (
+        f"{name}方向累计收录相关外资动态 {st['n']} 条（投资 {st['inv']} / 考察经贸 {st['ex']}），"
+        f"来源以{join_labels(st['countries'])}为主。头部企业 {mncs} 持续在华布局研发与产能。\n"
+        f"研判建议：南京应围绕 {name} 产业链关键环节，依托紫金山实验室、麒麟科创园等载体，"
+        f"争取上述头部企业在宁设立研发中心或联合创新平台；聚焦“强链补链”，把跨国公司的技术溢出"
+        f"转化为本地配套与产业生态，提升南京在 {name} 全国版图中的显示度。"
+    )
+
+
 def build_stats(d):
     items = d.get('items', [])
     inv = sum(1 for i in items if i.get('category') == 'investment')
@@ -164,12 +195,18 @@ def main():
         'jiangsu': compose_jiangsu(s),
         'exchange': compose_exchange(s),
     }
+    industries = {}
+    for name in INDUSTRIES:
+        industries[name] = compose_industry(name, industry_stats(d, name))
+    out['industries'] = industries
     path = os.path.join(HERE, 'ai_insights.json')
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
     print('已生成', path)
     for k in ('overview', 'investment', 'jiangsu', 'exchange'):
         print(f'  [{k}] {len(out[k])} 字')
+    for k in INDUSTRIES:
+        print(f'  [industry:{k}] {len(out["industries"][k])} 字')
     print('  生成于', out['generated_at'])
 
 
