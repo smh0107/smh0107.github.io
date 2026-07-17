@@ -1,0 +1,49 @@
+name: 每周生成 AI 研判
+
+# 触发方式：①定时（每周一 01:00 UTC = 北京 09:00）②手动触发
+on:
+  schedule:
+    - cron: "0 1 * * 1"        # 每周一生成一次（研判周期较长，一周足矣）
+  workflow_dispatch: {}       # 允许在 Actions 页面手动点“Run workflow”
+
+# 允许工作流把新生成的研判提交回仓库
+permissions:
+  contents: write
+
+# 避免与 3 小时数据刷新（refresh.yml）同时提交产生冲突
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  insights:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库代码
+        uses: actions/checkout@v4
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 用最新数据生成 AI 研判文本（ai_insights.json）
+        run: |
+          python generate_insights.py
+
+      - name: 合并研判并生成 data.json / data.js
+        run: |
+          python build_data.py
+
+      - name: 提交并推送更新
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.json data.js ai_insights.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "本次没有变化，跳过提交"
+          else
+            git commit -m "auto: 每周刷新 AI 研判"
+            git push
+            echo "已提交并推送最新研判"
+          fi

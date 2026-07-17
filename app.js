@@ -53,20 +53,10 @@ window.gotoPage = function (p) {
 /* 导航始终先绑定：即便数据异常，左侧模块切换也不会“失灵” */
 wireNav();
 
-/* 优先使用 data.js（本地双击 file:// 即可加载）；否则回退到 fetch data.json（服务器部署） */
-if (window.DATA && Array.isArray(window.DATA.items)) {
-  DATA = window.DATA;
-  boot();
-} else {
-  fetch('data.json')
-    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-    .then(d => { DATA = d; boot(); })
-    .catch(e => {
-      document.getElementById('content').innerHTML =
-        '<div class="loading">⚠ 数据加载失败。<br>本页面需通过本地/云端 HTTP 服务器访问（例如：<code>python -m http.server</code>），' +
-        '直接双击打开会因浏览器安全策略无法读取 data.json。<br><br><small>' + e + '</small></div>';
-    });
-}
+/* 数据加载与启动逻辑已移至文件末尾（见底部 bootstrap）：
+   以确保所有顶层 const（如 TILE_LAYOUT、SOURCE_OPTIONS）在 boot() 调用前
+   已完成初始化，避免“Cannot access 'TILE_LAYOUT' before initialization”
+   （TDZ）导致 renderOverview 的 innerHTML 赋值未完成、总览整页空白。 */
 
 /* 左侧导航点击：无条件绑定，数据未就绪时也能切换（显示提示而非“死”页） */
 function wireNav() {
@@ -193,7 +183,7 @@ function pager(total) {
 function filterBar(opts) {
   const base = opts.base || DATA.items;
   const f = state.filters;
-  let html = '<div class="filterbar">';
+  let html = '<div class="filterbar"><div class="fb-row">';
   if (opts.industry !== false) {
     html += '<span class="f-label">行业</span><select id="f-ind"><option value="">全部行业</option>' +
       DATA.industries.map(x => '<option value="' + esc(x) + '"' + (f.ind === x ? ' selected' : '') + '>' + esc(x) + '</option>').join('') +
@@ -222,8 +212,9 @@ function filterBar(opts) {
       '<input type="month" id="f-month" class="f-month" value="' + esc(f.month || '') + '" title="选择具体月份">' +
       '<span class="month-clear" id="f-month-clear">全部</span>';
   }
-  html += '<span class="f-label">关键词</span><input type="text" id="f-kw" placeholder="标题/摘要/来源…" value="' + esc(f.kw || '') + '">' +
-    '<span class="spacer"></span><span class="reset" id="f-reset">重置</span></div>';
+  html += '</div><div class="fb-row fb-kw">' +
+    '<span class="f-label">关键词</span><input type="text" id="f-kw" placeholder="标题 / 摘要 / 来源…" value="' + esc(f.kw || '') + '">' +
+    '<span class="spacer"></span><span class="reset" id="f-reset">重置</span></div></div>';
   return html;
 }
 
@@ -277,6 +268,9 @@ function renderOverview(c) {
     kpi(jsCount, '江苏相关动态', false) +
     kpi(exCount, '考察·经贸活动', false) +
     '</div>' +
+
+    /* AI 研判窗口（总览） */
+    renderAiInsight('overview') +
 
     /* 第一行：重点信息轮播（缩小）+ 外商动态热力图 */
     '<div class="grid-2 ov-row">' +
@@ -510,8 +504,11 @@ function renderList(c, opts) {
   if (opts.category) base = base.filter(i => i.category === opts.category);
   if (opts.jiangsu) base = base.filter(i => i.is_jiangsu);
 
+  const scope = opts.jiangsu ? 'jiangsu' : (opts.category === 'exchange' ? 'exchange' : 'investment');
+
   const wrap = document.createElement('div');
   wrap.innerHTML = filterBar({ base, citySelect: opts.citySelect }) +
+    renderAiInsight(scope) +
     '<div class="grid-2"><div><div class="feed" id="feed"></div></div>' +
     '<div class="panel"><h3>' + (opts.jiangsu ? '来苏投资' : (opts.category === 'exchange' ? '考察经贸' : '来华投资')) + '统计</h3>' +
     '<div id="stats"></div></div></div>' +
@@ -651,4 +648,36 @@ function policyCard(p) {
     '<span class="tag">' + esc(p.publisher) + '</span>' +
     '<span class="tag">' + esc(p.date) + '</span></div>' +
     '<a class="open-link" href="' + esc(p.url) + '" target="_blank" rel="noopener">查看政策原文</a></div>';
+}
+
+/* ============ AI 研判窗口 ============ */
+/* 读取 data.json 顶层 ai_insights：{ generated_at, overview, investment, jiangsu, exchange }
+   标注“AI研判”+生成时间；内容为按周自动生成的研判文本。 */
+function renderAiInsight(scope) {
+  const ai = (DATA && DATA.ai_insights) || {};
+  const text = ai[scope];
+  if (!text) return '';
+  const t = (ai.generated_at || '').replace('T', ' ');
+  return '<div class="ai-insight">' +
+    '<div class="ai-head"><span class="ai-badge">✦ AI 研判</span>' +
+    (t ? '<span class="ai-time">生成于 ' + esc(t) + '</span>' : '') + '</div>' +
+    '<div class="ai-body">' + esc(text) + '</div></div>';
+}
+
+/* ============ 启动（置于文件末尾）============
+   所有顶层 const（TILE_LAYOUT / SOURCE_OPTIONS / …）已初始化，
+   再触发数据加载与 boot()，避免 TDZ 报错导致总览空白。 */
+if (window.DATA && Array.isArray(window.DATA.items)) {
+  DATA = window.DATA;
+  boot();
+} else {
+  fetch('data.json')
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(d => { DATA = d; boot(); })
+    .catch(e => {
+      const c = document.getElementById('content');
+      if (c) c.innerHTML =
+        '<div class="loading">⚠ 数据加载失败。<br>本页面需通过本地/云端 HTTP 服务器访问（例如：<code>python -m http.server</code>），' +
+        '直接双击打开会因浏览器安全策略无法读取 data.json。<br><br><small>' + e + '</small></div>';
+    });
 }

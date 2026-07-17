@@ -337,6 +337,16 @@ def main():
     if len(items) > 500:
         items = items[:500]
     policies = enrich_policies()
+    # AI 研判：独立文件 ai_insights.json（由 generate_insights.py 按周生成），
+    # 此处并入输出，确保每 3 小时的数据刷新不会覆盖 AI 研判内容。
+    ai_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ai_insights.json")
+    ai_insights = None
+    if os.path.exists(ai_path):
+        try:
+            with open(ai_path, encoding="utf-8") as f:
+                ai_insights = json.load(f)
+        except Exception:
+            ai_insights = None
     data = {
         "updated_at": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
         "industries": INDUSTRIES,
@@ -344,6 +354,8 @@ def main():
         "policies": policies,
         "industry_intel": INDUSTRY_INTEL,
     }
+    if ai_insights:
+        data["ai_insights"] = ai_insights
     here = os.path.dirname(os.path.abspath(__file__))
     out_path = os.path.join(here, "data.json")
     with open(out_path, "w", encoding="utf-8") as f:
@@ -361,6 +373,10 @@ def main():
     print(f"  其中 江苏相关: {sum(1 for x in items if x['is_jiangsu'])} 条, 南京相关: {sum(1 for x in items if x['is_nanjing'])} 条")
     print(f"  政策文件: {len(policies)} 条 (国家级 {sum(1 for x in policies if x['level']=='国家级')} / 省级 {sum(1 for x in policies if x['level']=='省级')} / 市级 {sum(1 for x in policies if x['level']=='市级')} / 区级 {sum(1 for x in policies if x['level']=='区级')})")
     print(f"  四大产业情报: {len(INDUSTRY_INTEL)} 个产业 (头部跨国公司合计 {sum(len(v['companies']) for v in INDUSTRY_INTEL.values())} 家)")
+    if ai_insights:
+        print(f"  AI 研判: 已并入（生成于 {ai_insights.get('generated_at','')}）")
+    else:
+        print("  AI 研判: 未找到 ai_insights.json（请先运行 generate_insights.py）")
 
 if __name__ == "__main__":
     main()
