@@ -223,7 +223,7 @@ RAW_POLICIES = [
     dict(title="《江苏省2025年稳外资若干措施》（苏政办发〔2025〕19号）", summary="围绕深化重点领域开放、提升服务业开放水平等提出措施，加快南京服务业扩大开放综合试点，推动苏州服务业扩大开放试点方案。", url="https://www.njls.gov.cn/ztzl/yhyshjzt/zcjc/202505/t20250520_5566368.html", publisher="江苏省人民政府办公厅", level="省级", region="江苏省", province="江苏省", city="", date="2025-04-30"),
     dict(title="《南京市2025年稳外资若干措施》", summary="从加大引资支持力度、强化企业服务保障等方面提出措施，支持外资设立研发中心、鼓励利润再投资、强化重大和重点外资项目服务。", url="https://www.nanjing.gov.cn/zdgk/202505/t20250521_5567148.html", publisher="南京市人民政府办公厅", level="市级", region="南京市", province="江苏省", city="南京市", date="2025-05-21"),
     dict(title="《南京市关于支持工业企业增资扩产的若干政策措施》（宁政办规字〔2026〕1号）", summary="围绕市场需求、技术变革、总部生态等6类施策，明确支持外资企业追加投资增资扩产，鼓励外资企业利润再投资。", url="https://nqt.nanjing.gov.cn/nqtmh/njyst/pages/policy_market_detail.html?policyguid=865E8C96-1666-4C0F-828C-F219C17C7D52", publisher="南京市人民政府办公厅", level="市级", region="南京市", province="江苏省", city="南京市", date="2026-01-10"),
-    dict(title="《关于加快培育新质生产力推动高质量发展的若干政策（2026年版）》南京", summary="落实制造业外资准入限制“清零”，对符合方向的外资利润再投资、债转股或转增注册资本达规模的项目，单个最高给予2000万元支持。", url="https://swt.fj.gov.cn/xxgk/jgzn/jgcs/zmsyqzcyjs/zmzcc_gzdt/202602/t20260227_7102433.htm", publisher="南京市人民政府", level="市级", region="南京市", province="江苏省", city="南京市", date="2026-02-27"),
+    dict(title="《关于加快培育新质生产力推动高质量发展的若干政策（2026年版）》南京", summary="落实制造业外资准入限制“清零”，对符合方向的外资利润再投资、债转股或转增注册资本达规模的项目，按千分之三比例、单个最高给予2000万元支持；深化服务业扩大开放综合试点，大力引进医疗、电信、金融、文旅等领域外资。", url="https://invest.nanjing.gov.cn/gkml/202602/t20260209_5789982.html", publisher="南京市人民政府", level="市级", region="南京市", province="江苏省", city="南京市", date="2026-02-09"),
     dict(title="南京江北新区外资扩量提质若干措施", summary="聚焦“3+3+X”产业体系精准招商，对世界500强及大型跨国公司外资项目给予实到外资奖励，最高可达3000万元。", url="https://www.njnaexport.cn/618%e7%bd%91%e7%bb%9c%e9%9b%86%e4%b8%ad%e4%bf%83%e9%94%80%e5%90%88%e8%a7%84%e6%8f%90%e7%a4%ba%e5%8f%91%e5%b8%83/", publisher="南京江北新区", level="区级", region="南京市江北新区", province="江苏省", city="南京市", date="2026-03-01"),
     dict(title="《上海市优化营商环境条例》修订（2026年1月1日施行）", summary="明确对标国际高标准经贸规则，鼓励和促进外商投资，扩大服务贸易、数字贸易开放，在自贸区实行外商投资试验性政策。", url="http://www.why.com.cn/epublish/qnb/html/2025-11/27/content_119_39268.htm", publisher="上海市人大常委会", level="市级", region="上海市", province="上海市", city="上海市", date="2026-01-01"),
     dict(title="苏州被纳入国家服务业扩大开放综合试点", summary="商务部将苏州等9城市纳入服务业扩大开放综合试点，赋予159项试点任务，涵盖电信、医疗康养、金融、商贸文旅等领域。", url="https://www.toutiao.com/article/7593928075348345354/", source_pub="苏州发布", publisher="商务部、苏州市", level="市级", region="苏州市", province="江苏省", city="苏州市", date="2026-01-11"),
@@ -251,6 +251,25 @@ RAW_POLICIES = [
     dict(title="陕西自贸试验区落实17项改革举措放宽外资准入", summary="陕西自贸试验区实施提升战略，放宽外资准入：允许外商独资设立经营性职业技能培训机构、港澳台医生开设诊所、知名仲裁机构设业务机构，鼓励外商投资设立全球性区域性研发中心，建立生物医药进口研发用品“白名单”。", url="https://big5.china.com.cn/gate/big5/slzg.china.com.cn/2026-04/20/content_43402159.htm", publisher="陕西省自贸办", level="省级", region="陕西省", province="陕西省", city="", date="2026-04-20"),
     dict(title="《无锡市优化营商环境行动方案（2026版）》", summary="无锡市出台2026版优化营商环境方案，省内率先出台支持外资企业境内再投资“10条”、稳外贸稳就业16条，落地集成电路进口危化品“白名单”试点，港澳商务签注“智能速办”，升级锡企服务平台与AI数字管家。", url="https://www.wuxi.gov.cn/doc/2026/05/27/4782120.shtml", publisher="无锡市人民政府", level="市级", region="无锡市", province="江苏省", city="无锡市", date="2026-05-27"),
     dict(title="《苏州市激发产业创新活力专项行动方案》（苏政发〔2026〕55号）", summary="江苏省政府印发苏州专项行动方案，鼓励外商投资企业利润再投资、在苏州设立地区总部与研发中心，落实制造业外资准入限制“清零”，开展独资医院开放试点，推动“大中小、内外资”企业融通发展。", url="https://www.js.gov.cn/art/2026/6/29/art_64797_11796086.html", publisher="江苏省人民政府", level="市级", region="苏州市", province="江苏省", city="苏州市", date="2026-06-01"),
+
+    # ---------- 市级政策：覆盖全国 GDP 前 20 主要城市（解决市级仅限江苏问题）----------
+    dict(title="《北京市促进高精尖产业高水平对外开放行动方案（2025年）》", summary="北京市经信局印发，围绕高精尖产业推出24条举措：落实“两区”政策推动生物医药全产业链开放，推进增值电信扩大开放试点，鼓励外资参与高级别自动驾驶示范区、机器人百场景，推动QFLP试点落地，支持外资高质量孵化器与未来产业先导区建设。", url="https://invest.beijing.gov.cn/zwgk/zcjd/202505/t20250529_4101624.html", publisher="北京市经济和信息化局", level="市级", region="北京市", province="北京市", city="北京市", date="2025-05-29"),
+    dict(title="《深圳市进一步加大吸引和利用外资实施办法》", summary="深圳市人民政府印发，2026年1月1日起施行，从重点领域高水平对外开放、优化营商环境、投资运营便利化、资金支持、外商投资促进机制五方面提出22条措施，对制造业外资大项目最高奖励5000万元、累计最高1.5亿元，外资研发中心最高奖励600万元。", url="https://www.dpxq.gov.cn/ztzl/yhyshj/zcwj_183248/content/post_12666762.html", publisher="深圳市人民政府", level="市级", region="深圳市", province="广东省", city="深圳市", date="2025-12-19"),
+    dict(title="广州出台“促进外资高质量发展20条” 优化外商投资环境", summary="广州先后出台“促进外资高质量发展20条”“优化外商投资环境12条”，建立重点外资企业“白名单”、跨国公司直通车等机制，对符合条件的外资企业年度最高奖励5000万元、累计最高1.5亿元，支持外资研发中心和国际性总部落地。", url="https://www.gz.gov.cn/ysgz/xwdt/ysdt/content/post_10165686.html", publisher="广州市商务局", level="市级", region="广州市", province="广东省", city="广州市", date="2025-03-18"),
+    dict(title="《重庆市进一步优化外商投资环境加大吸引外商投资力度实施方案》", summary="重庆市政府办公厅印发，从提高利用外资质量、保障外商投资企业国民待遇、加大财税支持、完善投资促进方式等方面提出举措，落实外国投资者境内取得利润再投资暂不征收预提所得税，支持各区县对重点外资项目给予配套奖励。", url="https://admin.cq.gov.cn/zt/yhyshj/zcjj/kjmy/202404/t20240430_13172544_app.html", publisher="重庆市人民政府办公厅", level="市级", region="重庆市", province="重庆市", city="重庆市", date="2024-04-30"),
+    dict(title="《成都市进一步推动外资扩量提质促发展的若干政策措施》", summary="成都聚焦产业建圈强链，对年外商直接投资5000万美元以上重大外资新设、增资项目按2%给予最高1000万元奖励；支持跨国公司在蓉设全国/地区总部及研发中心，外资研发中心最高200万元研发资助，新引进国际中小企业最高500万元。", url="https://m.cdsme.com/Single.aspx?id=18242&m=zhinanshow", publisher="成都市人民政府", level="市级", region="成都市", province="四川省", city="成都市", date="2022-12-10"),
+    dict(title="杭州市2026年版经济政策：扩大高水平对外开放 支持高质量外资项目", summary="杭州2026年“8+4”经济政策设“扩大高水平对外开放政策包”，实施新一轮服务业扩大开放综合试点，办好全球数字贸易博览会，支持高质量外资大项目落地，实际使用外资目标44亿美元，强化双向投资合作。", url="https://zfgb.hangzhou.gov.cn/mobile_detail.shtml?a=0.56949002167677&doc_id=530218", publisher="杭州市人民政府", level="市级", region="杭州市", province="浙江省", city="杭州市", date="2026-02-08"),
+    dict(title="武汉经开区发布“外资十条” 外企落户车谷单项最高奖励3500万元", summary="武汉经开区出台《关于促进外商投资的实施意见（试行）》“外资十条”，涵盖落户、总部、场地、研发、人才等支持，世界500强外企落户最高奖励2500万元，固定资产投资最高奖励3500万元，总部及研发中心均有奖励。", url="https://xw.qq.com/cmsid/20220723A06CN100", publisher="武汉经开区", level="市级", region="武汉市", province="湖北省", city="武汉市", date="2022-07-23"),
+    dict(title="《宁波市人民政府办公厅印发关于进一步优化外商投资环境更大力度吸引和利用外资工作若干措施的通知》", summary="宁波出台若干措施，保障外资企业平等参与政府采购与标准制定，落实外资研发中心进口设备免征关税、采购国产设备全额退还增值税，建立外资企业圆桌会议制度，推进QFLP与跨境投融资便利化。", url="https://www.chinaningbo.com/news/view.html?id=20455", publisher="宁波市人民政府办公厅", level="市级", region="宁波市", province="浙江省", city="宁波市", date="2024-06-01"),
+    dict(title="《2026年天津商务工作要点》：打造“投资天津”品牌 加力吸引外商投资", summary="天津2026年商务工作要点提出打造“投资天津”品牌，落实新版《鼓励外商投资产业目录》，支持外资设立研发中心，用好利润再投资税收抵免，发挥重点外资项目专班和外资企业圆桌会议作用，实际利用外资目标40亿美元。", url="https://shangwuju.tj.gov.cn/tjsswjzz/swjzz/gabsycs/gsgggh/202602/t20260205_7240033.html", publisher="天津市商务局", level="市级", region="天津市", province="天津市", city="天津市", date="2026-02-05"),
+    dict(title="《青岛市服务业扩大开放综合试点工作实施方案》", summary="青岛出台服务业扩大开放综合试点方案，在增值电信、医疗康养、金融服务、商贸文旅等领域推出首创性举措，支持外资研发中心、深化QFLP试点，打造高水平对外开放新高地。", url="https://www.qingdao.gov.cn/zwgk/zdgk/fgwj/zcjd2023/zcjd2023_1/202605/t20260514_10595342.shtml", publisher="青岛市商务局", level="市级", region="青岛市", province="山东省", city="青岛市", date="2026-05-14"),
+    dict(title="《长沙市进一步扩大利用外资促进经济高质量发展的若干措施》", summary="长沙对实际使用外资500万美元以上的高技术产业外商投资企业按不超过1.5%给予支持，非高技术产业按不超过1%支持，每家企业每年最高300万元、累计最高1000万元；支持国际合作园区与外资研发中心建设。", url="http://swt.changsha.gov.cn/zfxxgk/tzgg_35733/202604/t20260416_12361926.html", publisher="长沙市商务局、长沙市财政局", level="市级", region="长沙市", province="湖南省", city="长沙市", date="2026-04-16"),
+    dict(title="《郑州市2026年招商引资工作方案》", summary="郑州2026年招商引资方案提出优化外资引进结构，高技术产业使用外资占比不低于75%，加强人工智能、数字经济、半导体制造等外资合作，完善“一项目一卡片”全生命周期服务，提升外资项目占比与质量。", url="https://public.zhengzhou.gov.cn/D0104X/9983582.jhtml", publisher="郑州市人民政府办公室", level="市级", region="郑州市", province="河南省", city="郑州市", date="2026-03-30"),
+    dict(title="佛山市2026年政府工作报告：落实稳外资专班 引导外资投向先进制造", summary="佛山2026年政府工作报告提出落实稳外资专班、圆桌会议、挂点服务等工作机制，引导外资更多投向先进制造、现代服务、高新技术、节能环保等领域，鼓励外资企业升级布局区域性总部及研发中心等功能性机构。", url="https://www.foshan.gov.cn/zwgk/zfgzbg/content/post_7099206.html", publisher="佛山市人民政府", level="市级", region="佛山市", province="广东省", city="佛山市", date="2026-02-01"),
+    dict(title="《福州市服务业扩大开放综合试点工作实施方案》", summary="福州获批国家服务业扩大开放综合试点，推出110项任务，在增值电信、医疗康养、金融服务等领域放宽准入，支持外资研发中心、QFLP试点与数字贸易走廊建设，打造海西对外开放新高地。", url="https://www.fuzhou.gov.cn/zfxxgkzl/szfbmjxsqxxgk/szfbmxxgk/fzsrmzfbgt/zc/xzgfxwj/202607/t20260709_5344824.htm", publisher="福州市人民政府办公厅", level="市级", region="福州市", province="福建省", city="福州市", date="2026-06-18"),
+    dict(title="《济南市优化营商环境创新提升行动实施方案（2026版）》", summary="济南2026版方案打造聚企联商的国际化营商环境，完善“涉外服务专窗”与“山海经”出海综合服务港，落实外资准入负面清单确保“准入又准营”，支持外资企业参与提振消费与内外贸一体化。", url="https://jntzcjj.jinan.gov.cn/col/col88584/art/2026/art_b585b4734b3b42b09c9751b99bd93059.html", publisher="济南市投资促进局", level="市级", region="济南市", province="山东省", city="济南市", date="2026-03-01"),
+    dict(title="合肥市2026年政府工作报告：实施外资倍增专项行动", summary="合肥2026年政府工作报告提出实施外资倍增专项行动，持续扩大服务业开放综合试点，新引进境外世界500强及行业领军企业10家以上，加大外资在肥设立研发中心和地区总部支持力度，鼓励利润再投资与存量企业增资。", url="https://www.hefei.gov.cn/public/1741/111625029.html", publisher="合肥市人民政府", level="市级", region="合肥市", province="安徽省", city="合肥市", date="2026-01-15"),
+    dict(title="《西安市以制造业为重点扩大利用外资若干措施》", summary="西安以制造业为重点扩大利用外资，鼓励外资投资高端装备、电子信息、新能源新材料、生物医药等领域，支持设立全球研发中心、区域总部，落实利润再投资暂不征收预提所得税，有效期至2026年12月31日。", url="https://xadrc.xa.gov.cn/web_files/xadrc/file/2024/01/08/202401081152332233232.pdf", publisher="西安市人民政府办公厅", level="市级", region="西安市", province="陕西省", city="西安市", date="2024-12-27"),
 ]
 
 # ============ 四大攻坚产业情报库（industry_intel）============
@@ -325,12 +344,20 @@ def main():
             with open(auto_path, encoding="utf-8") as f:
                 auto = json.load(f)
             seen = {(x.get("url"), norm_title(x.get("title", ""))) for x in items}
+            seen_titles = {norm_title(x.get("title", "")) for x in items}
+            today = datetime.date.today().strftime("%Y-%m-%d")
             for a in auto:
                 key = (a.get("url"), norm_title(a.get("title", "")))
-                if key in seen:
+                t = norm_title(a.get("title", ""))
+                # 逻辑校验：跳过“未来日期”或非法日期（例如把 2025 错写成 2026），避免动态出现未来时间
+                ad = a.get("date", "")
+                if not re.match(r"^\d{4}-\d{2}-\d{2}$", ad) or ad > today:
+                    continue
+                if key in seen or t in seen_titles:
                     continue
                 items.append(a)
                 seen.add(key)
+                seen_titles.add(t)
         except Exception:
             pass
     items.sort(key=lambda x: x.get("date", ""), reverse=True)
