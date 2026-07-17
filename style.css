@@ -88,21 +88,24 @@ a{color:inherit;text-decoration:none}
 }
 .cell-tag.hot{background:var(--red)}
 .cell-tag.heat{background:#1769aa}
+.cell-tag.ai{background:linear-gradient(120deg,#6c4bd8,#8b5cf0)}
 .cell-sub{font-size:12px;color:var(--muted)}
 .feat-wrap{position:relative}
-.feat-wrap .cell-tag.hot{position:absolute;left:12px;top:10px;z-index:4;box-shadow:0 1px 4px rgba(0,0,0,.25)}
 
-/* ============ 外商动态热力图（瓦片地图） ============ */
-.heatmap{
-  display:grid;grid-template-columns:repeat(10,1fr);gap:4px;
-  background:var(--card);border-radius:12px;padding:12px;box-shadow:var(--shadow);border:1px solid var(--line);
+/* ============ 外商动态热力图（中国地图） ============ */
+.china-map{
+  position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:10px;box-shadow:var(--shadow);line-height:0;
 }
-.htile{
-  aspect-ratio:1/1;border-radius:6px;display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:600;cursor:default;transition:transform .12s,box-shadow .12s;
-  border:1px solid rgba(14,42,71,.06);
+.china-map svg{width:100%;height:auto;display:block}
+.cm-prov{cursor:default;transition:opacity .15s, filter .15s}
+.cm-prov:hover{opacity:.82;filter:brightness(1.06)}
+.map-tip{
+  position:absolute;pointer-events:none;background:var(--navy);color:#fff;font-size:12.5px;
+  padding:6px 12px;border-radius:8px;box-shadow:0 4px 16px rgba(14,42,71,.32);
+  opacity:0;transition:opacity .12s;white-space:nowrap;z-index:10;line-height:1.4;
 }
-.htile:hover{transform:scale(1.08);box-shadow:0 2px 10px rgba(14,42,71,.25);z-index:5;position:relative}
+.map-tip b{color:#ffd2da;font-weight:700}
 
 /* ============ 头部跨国公司列表 ============ */
 .mnc{padding:10px 0;border-bottom:1px dashed var(--line)}
@@ -115,7 +118,8 @@ a{color:inherit;text-decoration:none}
 .intel-analysis{font-size:13px;color:#33424f;line-height:1.75;background:#f7f9fc;border-left:3px solid var(--red);padding:11px 14px;border-radius:0 8px 8px 0}
 
 /* ============ 两栏布局 ============ */
-.grid-2{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start}
+.grid-2{display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start}
+.grid-2.stretch{align-items:stretch}
 .panel{background:var(--card);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);border:1px solid var(--line)}
 .panel h3{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:7px}
 .panel h3::before{content:"";width:4px;height:14px;background:var(--red);border-radius:2px}
@@ -222,7 +226,7 @@ a{color:inherit;text-decoration:none}
 .carousel.single .carrow,.carousel.single .cdots{display:none}
 
 /* 重点信息轮播：缩小面积，仅放重点 */
-.carousel.compact{height:152px;margin-bottom:0}
+.carousel.compact{height:100%;min-height:152px;margin-bottom:0}
 .carousel.compact .c-body{padding:14px 18px;max-width:82%}
 .carousel.compact .c-title{font-size:15px;line-height:1.35}
 .carousel.compact .c-summary{font-size:11.5px;margin-top:5px;-webkit-line-clamp:1}
@@ -262,11 +266,9 @@ a{color:inherit;text-decoration:none}
   .ind-cards{grid-template-columns:repeat(2,1fr)}
   .sidebar{width:200px;flex-basis:200px}
   .carousel{height:210px}
-  .carousel.compact{height:140px}
+  .carousel.compact{height:160px}
   .carousel .c-body{max-width:94%;padding:18px 20px}
   .carousel .c-title{font-size:17px}
-  .heatmap{gap:3px;padding:8px}
-  .htile{font-size:9.5px}
 }
 
 /* ============ AI 研判窗口 ============ */
@@ -284,3 +286,10 @@ a{color:inherit;text-decoration:none}
 .ai-time{font-size:11.5px;color:#9a8fc0;font-weight:600}
 .ai-body{font-size:13.5px;line-height:1.85;color:#33324a;white-space:pre-line}
 .ai-body b,.ai-body strong{color:#4a3a8c}
+/* 列表页：AI 研判置于右侧栏顶部（去卡片化，作分隔块） */
+.ai-insight.inline{
+  background:transparent;border:none;border-bottom:1px solid var(--line);border-left:none;
+  border-radius:0;padding:0 0 14px;margin:0 0 14px;box-shadow:none;
+}
+.ai-insight.inline .ai-body{font-size:13px}
+.ai-insight.inline .ai-head{margin-bottom:8px}
