@@ -51,8 +51,6 @@ a{color:inherit;text-decoration:none}
 }
 .topbar-title{font-size:19px;font-weight:700;color:var(--navy);position:relative;padding-left:14px}
 .topbar-title::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:20px;background:var(--red);border-radius:3px}
-.topbar-org{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
-.topbar-org::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--red);display:inline-block}
 .topbar-right{display:flex;align-items:center;gap:18px}
 
 /* toast 提示 */
@@ -81,6 +79,13 @@ a{color:inherit;text-decoration:none}
 /* ============ 概览单元格标题 / 标签 ============ */
 .ov-row{margin-bottom:18px}
 .ov-cell{min-width:0}
+/* 总览“等尺寸并排”行：左右两栏等宽、等高，轮播/地图填满同一高度 */
+.grid-2.eq{grid-template-columns:1fr 1fr}
+.ov-row.eq{align-items:stretch}
+.ov-row.eq .ov-cell{display:flex;flex-direction:column;min-height:380px}
+.ov-row.eq .panel{min-height:380px}
+.ov-row.eq .feat-wrap{flex:1;display:flex;flex-direction:column}
+.ov-row.eq .carousel.compact{flex:1;height:auto;min-height:0}
 .cell-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .cell-tag{
   display:inline-flex;align-items:center;font-size:13px;font-weight:700;color:#fff;
@@ -98,6 +103,8 @@ a{color:inherit;text-decoration:none}
   padding:10px;box-shadow:var(--shadow);line-height:0;
 }
 .china-map svg{width:100%;height:auto;display:block}
+.ov-row.eq .china-map{flex:1;display:flex;align-items:center;justify-content:center;min-height:0}
+.ov-row.eq .china-map svg{height:100%;width:100%}
 .cm-prov{cursor:default;transition:opacity .15s, filter .15s}
 .cm-prov:hover{opacity:.82;filter:brightness(1.06)}
 .map-tip{
