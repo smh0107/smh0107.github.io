@@ -136,6 +136,24 @@ INDUSTRY_KW = {
 INVEST_KW = ["签约", "投产", "开工", "落地", "投资", "建设", "设立", "总部", "研发中心", "基地", "扩产", "增资", "新设", "入驻", "启用", "竣工"]
 EXCHANGE_KW = ["考察", "调研", "访问", "访华", "论坛", "洽谈", "参展", "参会", "博览会", "对接", "交流", "地方行", "行", "见面", "会见"]
 
+# 相关性种子词：标题命中任一才视为“外商来华投资/考察经贸”相关，过滤纯股市、
+# 国内无关等噪音（例如“美股纳斯达克指数涨跌”会被剔除）。
+RELEVANCE_KW = INVEST_KW + EXCHANGE_KW + [
+    "外资", "外商", "跨国", "合资", "独资", "德企", "美企", "日企", "韩企", "法企", "英企",
+    "瑞企", "荷企", "以企", "以色列", "沙特", "阿联酋", "新加坡", "投资中国", "来华", "在华",
+    "使节", "代表团", "经贸", "进博会", "投洽会", "服贸会", "总部", "研发中心", "工厂", "基地",
+    "项目", "增资", "扩产", "再投资", "产业园", "德国", "美国", "日本", "韩国", "法国", "英国",
+    "瑞士", "荷兰", "瑞典", "意大利", "西班牙", "加拿大", "澳大利亚", "巴西", "墨西哥", "南非",
+    "波兰", "比利时", "丹麦", "挪威", "芬兰", "卢森堡", "奥地利", "哈萨克斯坦", "赞比亚",
+    "斐济", "非盟", "白俄罗斯", "阿塞拜疆",
+]
+RELEVANCE_RE = re.compile("|".join(re.escape(k) for k in RELEVANCE_KW))
+
+
+def is_relevant(title):
+    """仅保留与‘外商来华投资/考察经贸’相关的条目，过滤股市/国内无关噪音。"""
+    return bool(RELEVANCE_RE.search(title or ""))
+
 # 省市地理映射（覆盖全部 34 个省级行政区，南京优先；用于把抓取到的动态归属到省/市）
 PROVINCE_CITY = [
     ("南京市", "江苏省", ["南京", "建邺", "江宁", "高淳", "江北", "玄武", "鼓楼"]),
@@ -406,6 +424,8 @@ def run(max_n, use_gdelt):
     # 分类 + 解析原文真实 url + 头图（前 60 条尽力取真实地址与头图）
     fresh = []
     for i, it in enumerate(unique, 1):
+        if not is_relevant(it["title"]):
+            continue
         meta = classify(it["title"], "")
         real_url = it["url"]
         image = ""
@@ -423,57 +443,41 @@ def run(max_n, use_gdelt):
             **meta
         })
 
-    # 与历史数据合并：保留旧条目中更丰富的摘要；丢弃 120 天前的旧条目以保持“新鲜”；上限 500 条。
-    # 这样既能叠加本次全国级广度，又不丢失此前人工/历史整理的高质量条目。
-    policies = []
-    old_items = []
-    if os.path.exists(DATA_PATH):
+    # 写入 auto_items.json（增量）。最终 data.json 由 build_data.py 合并
+    # “人工基线(RAW_ITEMS) + 增量(auto_items.json)”生成，保证人工整理的优质
+    # 基线永不被覆盖。仅保留相关性高的条目，丢弃 120 天前的旧条目，上限 400 条。
+    AUTO_PATH = os.path.join(HERE, "auto_items.json")
+    old_auto = []
+    if os.path.exists(AUTO_PATH):
         try:
-            with open(DATA_PATH, "r", encoding="utf-8") as f:
-                old = json.load(f)
-            old_items = old.get("items", [])
-            policies = old.get("policies", [])
-            print(f"  保留政策文件 {len(policies)} 条（人工维护，不覆盖）")
+            with open(AUTO_PATH, encoding="utf-8") as f:
+                old_auto = json.load(f)
         except Exception:
             pass
 
     seen_urls = {n["url"] for n in fresh}
-    cutoff = (datetime.datetime.now() - datetime.timedelta(days=120)).strftime("%Y-%m-%d")
+    seen_titles = {norm_title(n["title"]) for n in fresh}
     merged = list(fresh)
+    cutoff = (datetime.datetime.now() - datetime.timedelta(days=120)).strftime("%Y-%m-%d")
     kept_old = 0
-    for o in old_items:
-        if o.get("url") in seen_urls:
-            continue  # 本次已抓到同链接，用新的（带真实 url/图）
+    for o in old_auto:
+        if o.get("url") in seen_urls or norm_title(o.get("title", "")) in seen_titles:
+            continue
         if (o.get("date") or "") < cutoff:
-            continue  # 过期旧条目丢弃
+            continue
         merged.append(o)
         seen_urls.add(o["url"])
+        seen_titles.add(norm_title(o.get("title", "")))
         kept_old += 1
-    print(f"  合并历史条目 {kept_old} 条（保留优质摘要），本次新增 {len(fresh)} 条")
+    merged.sort(key=lambda x: x.get("date", ""), reverse=True)
+    if len(merged) > 400:
+        merged = merged[:400]
 
-    merged.sort(key=lambda x: x["date"], reverse=True)
-    if len(merged) > 500:
-        merged = merged[:500]
-
-    data = {
-        "updated_at": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
-        "industries": INDUSTRIES,
-        "items": merged,
-        "policies": policies,
-    }
-    with open(DATA_PATH, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-    # 同时生成 data.js，供本地双击打开(file://)时正常加载
-    js_path = os.path.join(HERE, "data.js")
-    with open(js_path, "w", encoding="utf-8") as f:
-        f.write("/* 自动生成，请勿手改。由 crawler.py 生成。*/\n")
-        f.write("window.DATA = ")
-        json.dump(data, f, ensure_ascii=False, indent=2)
-        f.write(";\n")
-    print(f"  已生成 data.js（本地双击打开可用）")
-    print(f"  完成：动态 {len(merged)} 条（投资 {sum(1 for x in merged if x['category']=='investment')} / "
-          f"考察经贸 {sum(1 for x in merged if x['category']=='exchange')}），"
-          f"江苏相关 {sum(1 for x in merged if x['is_jiangsu'])} 条 → {DATA_PATH}")
+    with open(AUTO_PATH, "w", encoding="utf-8") as f:
+        json.dump(merged, f, ensure_ascii=False, indent=2)
+    print(f"  已生成 auto_items.json（本次新增 {len(fresh)} 条，合并历史 {kept_old} 条，合计 {len(merged)} 条）→ {AUTO_PATH}")
+    print(f"  完成：本次新增 {len(fresh)} 条（投资 {sum(1 for x in fresh if x['category']=='investment')} / "
+          f"考察经贸 {sum(1 for x in fresh if x['category']=='exchange')}）")
 
 
 if __name__ == "__main__":
