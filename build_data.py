@@ -347,6 +347,14 @@ def main():
                 ai_insights = json.load(f)
         except Exception:
             ai_insights = None
+    # 四大产业"产业研判"：用按周生成的 AI 文本替换静态 analysis，并附生成时间
+    if ai_insights and ai_insights.get("industries"):
+        for name, info in INDUSTRY_INTEL.items():
+            ind = ai_insights["industries"].get(name)
+            if ind:
+                info["analysis"] = ind
+                info["generated_at"] = ai_insights.get("generated_at", "")
+
     data = {
         "updated_at": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
         "industries": INDUSTRIES,
