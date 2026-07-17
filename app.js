@@ -257,34 +257,26 @@ function applyFilters(items) {
 /* ============ 总览 ============ */
 function renderOverview(c) {
   const items = DATA.items.slice().sort(byDateDesc);
-  const exCount = items.filter(i => i.category === 'exchange').length;
-  const invCount = items.length - exCount;
 
   c.innerHTML =
-    /* AI 研判窗口（总览，置于页面最上方） */
+    /* 第一排：AI 研判窗口（总览，置于页面最上方 · 保持现状） */
     renderAiInsight('overview') +
 
-    /* 第一行：重点信息轮播（缩小）+ 外商动态中国地图热力图 */
-    '<div class="grid-2 ov-row stretch">' +
+    /* 第二排：左侧重点信息轮播 + 右侧外商动态中国地图热力图（两模块等尺寸并排） */
+    '<div class="grid-2 ov-row eq stretch">' +
       '<div class="ov-cell">' + buildCarousel(items.filter(isKeyInfo).sort(byDateDesc).slice(0, 5)) + '</div>' +
       '<div class="ov-cell">' + buildHeatmap(items) + '</div>' +
     '</div>' +
 
-    /* 第二行：来源国家/地区 TOP + 活动类型分布 */
-    '<div class="grid-2 ov-row">' +
+    /* 第三排：左侧来源国家/地区 TOP + 右侧行业分布 TOP（两模块等尺寸并排） */
+    '<div class="grid-2 ov-row eq">' +
       '<div class="panel"><div class="cell-head"><span class="cell-tag">来源国家/地区 TOP</span></div>' +
         barChart(sourceCounts(items).slice(0, 8)) + '</div>' +
-      '<div class="panel"><div class="cell-head"><span class="cell-tag">活动类型分布</span></div>' +
-        donut([
-          { label: '投资落地/增资/总部/研发', value: invCount, color: '#15395f' },
-          { label: '考察/经贸/参会/论坛', value: exCount, color: '#c8102e' }
-        ]) + '</div>' +
+      '<div class="panel"><div class="cell-head"><span class="cell-tag">行业分布 TOP</span></div>' +
+        barChart(topCount(items.filter(i => i.industry), 'industry', 8)) + '</div>' +
     '</div>' +
 
-    /* 第三行：行业分布 TOP（整行） */
-    '<div class="panel ov-row"><div class="cell-head"><span class="cell-tag">行业分布 TOP</span></div>' +
-      barChart(topCount(items.filter(i => i.industry), 'industry', 8)) + '</div>' +
-
+    /* 最下方：最新动态（保持） */
     '<div class="section-title"><span class="bar"></span>最新动态</div>' +
     '<div class="feed">' + items.slice(0, PAGE_SIZE).map(itemCard).join('') + '</div>' +
     pager(items.length);
