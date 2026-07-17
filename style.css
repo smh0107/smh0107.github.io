@@ -54,19 +54,6 @@ a{color:inherit;text-decoration:none}
 .topbar-org{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
 .topbar-org::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--red);display:inline-block}
 .topbar-right{display:flex;align-items:center;gap:18px}
-.refresh-btn{
-  display:inline-flex;align-items:center;gap:7px;cursor:pointer;
-  border:1px solid var(--navy-2);background:var(--navy);color:#fff;
-  font-size:13px;font-weight:600;padding:8px 15px;border-radius:8px;
-  font-family:inherit;transition:background .15s,box-shadow .15s,transform .05s;
-  box-shadow:0 1px 3px rgba(14,42,71,.15);
-}
-.refresh-btn:hover{background:var(--navy-3)}
-.refresh-btn:active{transform:translateY(1px)}
-.refresh-btn .refresh-ico{font-size:15px;line-height:1;display:inline-block}
-.refresh-btn.loading{opacity:.75;cursor:progress}
-.refresh-btn.loading .refresh-ico{animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
 
 /* toast 提示 */
 .toast{
@@ -90,6 +77,42 @@ a{color:inherit;text-decoration:none}
 .kpi .num small{font-size:14px;font-weight:600;color:var(--muted)}
 .kpi .lab{font-size:13px;color:var(--muted);margin-top:6px}
 .kpi.red .num{color:var(--red)}
+
+/* ============ 概览单元格标题 / 标签 ============ */
+.ov-row{margin-bottom:18px}
+.ov-cell{min-width:0}
+.cell-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.cell-tag{
+  display:inline-flex;align-items:center;font-size:13px;font-weight:700;color:#fff;
+  background:var(--navy);padding:5px 12px;border-radius:7px;letter-spacing:.5px;
+}
+.cell-tag.hot{background:var(--red)}
+.cell-tag.heat{background:#1769aa}
+.cell-sub{font-size:12px;color:var(--muted)}
+.feat-wrap{position:relative}
+.feat-wrap .cell-tag.hot{position:absolute;left:12px;top:10px;z-index:4;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+
+/* ============ 外商动态热力图（瓦片地图） ============ */
+.heatmap{
+  display:grid;grid-template-columns:repeat(10,1fr);gap:4px;
+  background:var(--card);border-radius:12px;padding:12px;box-shadow:var(--shadow);border:1px solid var(--line);
+}
+.htile{
+  aspect-ratio:1/1;border-radius:6px;display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:600;cursor:default;transition:transform .12s,box-shadow .12s;
+  border:1px solid rgba(14,42,71,.06);
+}
+.htile:hover{transform:scale(1.08);box-shadow:0 2px 10px rgba(14,42,71,.25);z-index:5;position:relative}
+
+/* ============ 头部跨国公司列表 ============ */
+.mnc{padding:10px 0;border-bottom:1px dashed var(--line)}
+.mnc:last-child{border-bottom:none}
+.mnc-top{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.mnc-name{font-size:14px;font-weight:800;color:var(--navy)}
+.mnc-link{margin-left:auto;font-size:12px;color:var(--navy-3);font-weight:700}
+.mnc-link:hover{color:var(--red)}
+.mnc-dyn{font-size:12.5px;color:#48586b;line-height:1.6}
+.intel-analysis{font-size:13px;color:#33424f;line-height:1.75;background:#f7f9fc;border-left:3px solid var(--red);padding:11px 14px;border-radius:0 8px 8px 0}
 
 /* ============ 两栏布局 ============ */
 .grid-2{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start}
@@ -195,6 +218,14 @@ a{color:inherit;text-decoration:none}
 .carousel .c-dot.active{background:#fff;width:22px;border-radius:5px}
 .carousel.single .carrow,.carousel.single .cdots{display:none}
 
+/* 重点信息轮播：缩小面积，仅放重点 */
+.carousel.compact{height:152px;margin-bottom:0}
+.carousel.compact .c-body{padding:14px 18px;max-width:82%}
+.carousel.compact .c-title{font-size:15px;line-height:1.35}
+.carousel.compact .c-summary{font-size:11.5px;margin-top:5px;-webkit-line-clamp:1}
+.carousel.compact .c-link{margin-top:8px;padding:5px 12px;font-size:12px}
+.carousel.compact .carrow{width:30px;height:30px;font-size:18px}
+
 /* ============ 类型统计小条 ============ */
 .type-stat{display:flex;flex-wrap:wrap;gap:10px}
 .type-stat .ts{font-size:13px;font-weight:700;padding:7px 14px;border-radius:8px}
@@ -228,6 +259,9 @@ a{color:inherit;text-decoration:none}
   .ind-cards{grid-template-columns:repeat(2,1fr)}
   .sidebar{width:200px;flex-basis:200px}
   .carousel{height:210px}
+  .carousel.compact{height:140px}
   .carousel .c-body{max-width:94%;padding:18px 20px}
   .carousel .c-title{font-size:17px}
+  .heatmap{gap:3px;padding:8px}
+  .htile{font-size:9.5px}
 }

@@ -192,6 +192,26 @@ RAW_ITEMS = [
     dict(title="2026山东省国际贸易和投资顾问威海行成功举办", summary="来自意大利、墨西哥、肯尼亚等多国商协会、国际组织、跨国公司40余人代表团走进威海，西门子、东盟中国工商总会、德国安顾集团、毕马威等机构代表与威海企业精准洽谈对接，达成多项合作意向。", url="http://mch.weihai.gov.cn/art/2026/7/13/art_8389_6478245.html", source="威海市贸促会", country="多国", industry="", event_type="经贸洽谈", region="山东省", province="山东省", city="威海市", date="2026-07-10"),
     dict(title="2026中外知名企业四川行在成都举行", summary="四川十五五开局之年首场省级综合性重大投资促进平台活动2026中外知名企业四川行在成都举行，通过投资推介、产业专场、实地考察等形式深化产业协作，筹备期间共达成合作项目301个。", url="https://m.chinanews.com/wap/detail/cht/zw/441780.shtml", source="中国新闻网", country="多国", industry="", event_type="经贸洽谈", region="四川省", province="四川省", city="成都市", date="2026-06-25"),
     dict(title="2026德国隐形冠军企业成都园区行举办", summary="蔡司、西门子、卡赫等30余家德国隐形冠军企业及知名机构代表齐聚成都，深入蒲江、邛崃、青白江产业园区考察，通过实地考察、高层会见、专题对接推动中德地方经贸合作从意向走向实景。", url="https://www.sohu.com/a/999108070_115362", source="搜狐城市", country="德国", industry="智能制造装备", event_type="考察调研", region="四川省", province="四川省", city="成都市", date="2026-03-19"),
+
+    # ---------- 第三批：全国再扩充（基于真实网络检索，补齐上海/安徽/河南/湖北/跨国药企头部动态，拓宽来源）----------
+    # 上海
+    dict(title="英伟达上海张江新办公楼启用 在华员工近4000人", summary="英伟达上海新办公楼在张江纳贤路启用，建筑面积约2.33万平方米；其在华员工近4000人，上海研发中心超2000人，聚焦芯片设计验证、产品优化与自动驾驶研究。", url="https://www.eeo.com.cn/2026/0125/782771.shtml", source="经济观察报", country="美国", industry="人工智能(软件)", event_type="研发中心", region="上海市", province="上海市", city="上海市", date="2026-01-25"),
+    dict(title="ABB机器人超级工厂在上海浦东康桥投产", summary="ABB投资约1.5亿美元（约合11亿元人民币）、占地6.7万平方米的机器人超级工厂在浦东康桥开业，采用全自动化柔性生产制造新一代机器人，未来在华销售九成以上产品将在此生产。", url="https://www.iseee.cn?p=/ShopNews/detail/zs/208/id/151", source="北京国际工业自动化展", country="瑞士", industry="机器人", event_type="投资落地", region="上海市", province="上海市", city="上海市", date="2026-04-01"),
+    # 安徽
+    dict(title="达维诺营养乳业安徽生产基地落户亳州 总投资23.2亿元", summary="由荷兰莱茵投资集团、芬兰法森集团、奥地利阿果那集团联合投资的达维诺营养乳业安徽生产基地在亳州谯城经开区开工，总投资约23.2亿元，规划年产婴幼儿配方奶粉10万吨、燕麦奶50万吨。", url="https://www.muyingjie.com/article-25542.html", source="母婴行业观察", country="荷兰", industry="生物医药", event_type="投资落地", region="安徽省", province="安徽省", city="亳州市", date="2026-07-07"),
+    dict(title="安徽怀远年产2000万套高性能橡塑管材及汽车零部件项目签约", summary="外商投资企业安徽摩配斯智能科技有限公司投资建设的年产2000万套高性能橡塑管材及新能源汽车橡胶零部件项目在怀远县签约，引进自动化智能化生产线，丰富当地汽车零部件产品体系。", url="https://www.toutiao.com/article/7595906273850229299", source="怀远发布", country="跨国企业", industry="智能网联新能源汽车", event_type="投资落地", region="安徽省", province="安徽省", city="蚌埠市", date="2026-01-16"),
+    # 河南
+    dict(title="2026年河南省重大国际产业合作项目名单发布 55个项目", summary="河南省发布2026年重大国际产业合作项目名单，共55个项目，其中外商投资项目27个、总投资252.19亿元，涵盖新一代信息技术、现代装备、新能源与智能网联汽车、生物医药等，含卢森堡SolarCleano光伏清洁机器人基地。", url="https://ha.people.com.cn/BIG5/n2/2026/0618/c351638-41613898.html", source="人民网", country="多国", industry="机器人", event_type="投资落地", region="河南省", province="河南省", city="郑州市", date="2026-06-17"),
+    # 湖北
+    dict(title="武汉蔡甸中德国际产业园集聚外资企业超70家", summary="武汉蔡甸中德国际产业园作为对外开放核心平台，已集聚知名外资企业超70家，德资、美资、港澳台资企业纷至沓来，诺峰半导体等项目用时60天完成谈判签约落户全流程。", url="https://www.whcdrm.com/thread-22322-1-1.html", source="蔡甸融媒", country="德国", industry="智能制造装备", event_type="投资落地", region="湖北省", province="湖北省", city="武汉市", date="2026-03-30"),
+    # 跨国药企千亿级加码（全国层面，行业=生物医药）
+    dict(title="跨国药企集体“加仓”中国：一场超千亿元的信任投票", summary="中国发展高层论坛2026期间，阿斯利康宣布2030年前在华投资超1000亿元，诺华新增超33亿元、礼来未来十年30亿美元、罗氏20.4亿元、赛诺菲北京亦庄10亿欧元基地开工，跨国药企从“在中国卖药”转向“在中国创新、生产、共创”。", url="https://www.21jingji.com/article/20260323/herald/82a6eaf862e9baccbd6ccc8a83f91485.html", source="21世纪经济报道", country="多国", industry="生物医药", event_type="投资落地", region="全国", province="", city="", date="2026-03-23"),
+    # 新一代信息通信：MWC2026 6G/AI原生
+    dict(title="MWC2026展示AI原生6G架构 高通爱立信诺基亚三星同台", summary="2026巴塞罗那世界移动通信大会以“智能新纪元”为主题，高通展示AI原生6G架构（太赫兹、RIS、通感一体），爱立信提出Intelligent Fabric智能织网，诺基亚强化AI自优化，三星展示6G沉浸式通信潜力，6G目标2030年商用。", url="https://www.toutiao.com/article/7613521933497385512", source="21世纪经济报道", country="多国", industry="新一代信息通信", event_type="参展参会", region="全国", province="", city="", date="2026-03-05"),
+    # 机器人：美的库卡昆山
+    dict(title="美的库卡华东智能制造中心签约落户昆山 增资3000万美元", summary="美的库卡华东智能制造中心项目签约落户昆山高新区，拟增资3000万美元，扩充工业机器人产能并新设智慧仓储物流与轻载柔性机器人产线，达产年产值预计超30亿元。", url="https://www.iianews.com/ca/_01-ABC00000000000371518.shtml", source="中国工控网", country="德国", industry="机器人", event_type="增资扩产", region="江苏省", province="江苏省", city="苏州市", date="2026-04-22"),
+    # 人工智能：亚马逊撤离（有进有退信号）
+    dict(title="亚马逊关闭上海最后一家AI研究中心 外企在华研发现调整", summary="2026年4月，亚马逊结束其在中国上海的最后一家人工智能研究中心运营，标志中美科技博弈下外企在华本土研发力量的阶段性调整，DGL开源工具曾为其电商带来近10亿美元收入。", url="https://www.vpshk.cn/20260438038.html", source="科技媒体", country="美国", industry="人工智能(软件)", event_type="考察调研", region="上海市", province="上海市", city="上海市", date="2026-04-16"),
 ]
 
 # 政策文件（level: 国家级/省级/市级/区级）
@@ -222,7 +242,58 @@ RAW_POLICIES = [
     dict(title="《关于促进两岸经济文化交流合作的若干措施》（“31条惠台措施”）", summary="国务院台办、国家发改委等31个部门联合发布31条措施，涵盖产业、财税、用地、金融、就业、教育、文化等领域，为台资企业提供同等待遇。", url="http://www.gwytb.gov.cn/m/xwdt/201802/t20180228_11912700.htm", publisher="国务院台办、国家发改委", level="国家级", region="全国", province="", city="", date="2018-02-28"),
     dict(title="《内地与香港关于建立更紧密经贸关系的安排》（CEPA）", summary="内地与香港签署CEPA，确立货物贸易零关税、服务贸易自由化、贸易投资便利化等制度安排，为港资进入内地提供稳定可预期的政策框架。", url="https://www.tid.gov.hk/sc/trade_with_mainland_CEPA/index.html", publisher="商务部、香港特区政府", level="国家级", region="全国", province="", city="", date="2003-06-29"),
     dict(title="《横琴粤澳深度合作区建设总体方案》", summary="中共中央、国务院印发总体方案，明确横琴合作区战略定位、发展目标、产业布局和制度创新，为澳资进入横琴、促进澳门经济适度多元发展提供顶层政策支撑。", url="https://www.gov.cn/zhengce/2021-09/05/content_5636483.htm", publisher="中共中央、国务院", level="国家级", region="广东省", province="广东省", city="珠海市", date="2021-09-05"),
+
+    # ---------- 更多省级/市级政策（解决政策不全）----------
+    dict(title="安徽省《关于巩固拓展经济稳中向好势头若干政策举措》（2026年“三十条”）", summary="安徽省出台2026年“三十条”，统筹省级资金350.2亿元，实施“徽动全球”出海行动，办好世界制造业大会、RCEP地方政府暨友城合作（黄山）论坛、“海客圆桌会”，对新认定省级外资研发中心给予奖励。", url="https://www.ah.gov.cn/zwyw/jryw/565497491.html", publisher="安徽省人民政府", level="省级", region="安徽省", province="安徽省", city="", date="2026-02-14"),
+    dict(title="安徽省稳外资16条举措", summary="安徽省商务厅出台稳外资16条，对投资新兴产业、利润再投资及设立研发中心和地区总部给予支持，建立制造业重大外资项目“绿色通道”，探索外资企业注册登记容缺受理、外商再投资外汇免登记试点。", url="https://commerce.ah.gov.cn/public/21711/123399801.html", publisher="安徽省商务厅", level="省级", region="安徽省", province="安徽省", city="", date="2026-02-14"),
+    dict(title="湖北省《聚焦支点建设打造一流营商环境若干措施》", summary="湖北省政府办公厅印发措施，落实制造业领域外资准入限制“清零”，推进服务业扩大开放综合试点，推动外资项目增资扩股，提升与欧洲、日韩合作层级，用好进博会等平台策划招商，打造“投资中国·优选湖北”品牌。", url="https://new.qq.com/rain/a/20260424A02CMP00", publisher="湖北省人民政府办公厅", level="省级", region="湖北省", province="湖北省", city="", date="2026-04-24"),
+    dict(title="河北省2026年四大举措营造高水平利用外资环境", summary="河北省商务厅2026年聚焦“引得来、落得下、留得住、发展好”，在驻天津/上海/广州办事处设“河北招商会客厅”，为外资项目开辟绿色通道、容缺受理，常态化举办“燕赵会客厅”外资企业圆桌会。", url="http://m1.tibet.cn/cn/Instant/news/202603/t20260302_7937950.html", publisher="河北省商务厅", level="省级", region="河北省", province="河北省", city="", date="2026-03-02"),
+    dict(title="陕西自贸试验区落实17项改革举措放宽外资准入", summary="陕西自贸试验区实施提升战略，放宽外资准入：允许外商独资设立经营性职业技能培训机构、港澳台医生开设诊所、知名仲裁机构设业务机构，鼓励外商投资设立全球性区域性研发中心，建立生物医药进口研发用品“白名单”。", url="https://big5.china.com.cn/gate/big5/slzg.china.com.cn/2026-04/20/content_43402159.htm", publisher="陕西省自贸办", level="省级", region="陕西省", province="陕西省", city="", date="2026-04-20"),
+    dict(title="《无锡市优化营商环境行动方案（2026版）》", summary="无锡市出台2026版优化营商环境方案，省内率先出台支持外资企业境内再投资“10条”、稳外贸稳就业16条，落地集成电路进口危化品“白名单”试点，港澳商务签注“智能速办”，升级锡企服务平台与AI数字管家。", url="https://www.wuxi.gov.cn/doc/2026/05/27/4782120.shtml", publisher="无锡市人民政府", level="市级", region="无锡市", province="江苏省", city="无锡市", date="2026-05-27"),
+    dict(title="《苏州市激发产业创新活力专项行动方案》（苏政发〔2026〕55号）", summary="江苏省政府印发苏州专项行动方案，鼓励外商投资企业利润再投资、在苏州设立地区总部与研发中心，落实制造业外资准入限制“清零”，开展独资医院开放试点，推动“大中小、内外资”企业融通发展。", url="https://www.js.gov.cn/art/2026/6/29/art_64797_11796086.html", publisher="江苏省人民政府", level="市级", region="苏州市", province="江苏省", city="苏州市", date="2026-06-01"),
 ]
+
+# ============ 四大攻坚产业情报库（industry_intel）============
+# 供“四大攻坚产业动态”模块点击产业后展示：头部跨国公司 + 全球/在华动态 + 产业研判
+# companies: 头部跨国公司（name/country/dynamic/url）；analysis: 面向南京产业攻坚的研判
+INDUSTRY_INTEL = {
+    "人工智能(软件)": {
+        "analysis": "全球AI竞争进入“研发本土化+生态绑定”阶段。英伟达、微软等持续在华布局研发中心，但受出口管制影响部分外企在华研发布局出现调整（如亚马逊关闭上海AI实验室），呈现“有进有退”。南京软件产业基础雄厚、高校人才密集，应聚焦行业大模型、智能体（Agent）、AI+工业软件等应用层与工具层，承接外企研发外包、联合实验室与生态合作，规避底层算力受制于人风险。",
+        "companies": [
+            {"name": "英伟达", "country": "美国", "dynamic": "上海张江新办公楼启用，在华员工近4000人、上海研发中心超2000人，聚焦芯片设计验证与自动驾驶研究。", "url": "https://www.eeo.com.cn/2026/0125/782771.shtml"},
+            {"name": "微软", "country": "美国", "dynamic": "在上海张江人工智能岛设AI&IoT实验室，提供端到端IoT方案验证，与IBM等共建开放创新生态。", "url": "http://www.urlou.com/news/show-8129.html"},
+            {"name": "亚马逊", "country": "美国", "dynamic": "2026年4月关闭上海最后一家AI研究中心，反映中美科技博弈下外企在华研发布局的阶段性调整。", "url": "https://www.vpshk.cn/20260438038.html"},
+        ],
+    },
+    "机器人": {
+        "analysis": "外资机器人巨头加速在华“本土化制造+系统集成”。ABB、库卡（美的）、发那科、安川等纷纷落子扩产，竞争从“卖本体”转向“机器人本体+移动机器人+智能物流+行业解决方案”全场景。南京可依托智能制造与汽车、电子产业需求，重点承接工业机器人集成应用、具身智能（人形机器人核心零部件）、智能物流产线，并争取外企区域应用展示与培训中心。",
+        "companies": [
+            {"name": "ABB", "country": "瑞士", "dynamic": "投资约1.5亿美元、占地6.7万㎡的机器人超级工厂在上海浦东康桥投产，未来在华销售九成以上产品在此生产。", "url": "https://www.iseee.cn?p=/ShopNews/detail/zs/208/id/151"},
+            {"name": "美的库卡", "country": "德国", "dynamic": "华东智能制造中心签约落户昆山，增资3000万美元，达产年产值预计超30亿元，六大业务板块首次在华东协同。", "url": "https://www.iianews.com/ca/_01-ABC00000000000371518.shtml"},
+            {"name": "发那科", "country": "日本", "dynamic": "上海机器人超级工厂持续扩产，深耕中国高端制造，与广州、重庆基地协同服务全国。", "url": "https://www.ciie.org/zbh/bqxwbd/20260408/58821.html"},
+            {"name": "安川", "country": "日本", "dynamic": "在华布局工业机器人及运动控制，常州、常州武进等地持续深耕，服务长三角装备制造集群。", "url": "https://www.ciie.org/zbh/bqxwbd/20260408/58821.html"},
+        ],
+    },
+    "生物医药": {
+        "analysis": "跨国药企掀起“千亿级”在华投资热潮，战略从“在中国卖药”全面升级为“在中国研发、生产、共创”，聚焦细胞与基因治疗、放射配体疗法、GLP-1、RSV疫苗等高壁垒赛道。南京生物医药（基因与细胞治疗、创新药、CXO）基础扎实，应争取跨国药企研发合作、临床转化与特色原料药/制剂生产基地，并借力“健康中国2030”将生物医药列为新兴支柱产业的窗口期。",
+        "companies": [
+            {"name": "阿斯利康", "country": "英国", "dynamic": "2030年前在华投资超1000亿元，广州建RDC基地、上海建细胞疗法基地、北京建全球第六大研发中心，并与清华共建AI药物研发联合中心。", "url": "https://www.21jingji.com/article/20260323/herald/82a6eaf862e9baccbd6ccc8a83f91485.html"},
+            {"name": "诺华", "country": "瑞士", "dynamic": "2026年新增超33亿元在华投资，扩建北京昌平工厂与上海园区，浙江海盐建中国首个放射配体药品生产基地。", "url": "https://www.21jingji.com/article/20260323/herald/82a6eaf862e9baccbd6ccc8a83f91485.html"},
+            {"name": "礼来", "country": "美国", "dynamic": "未来十年在华投资30亿美元，扩建苏州工厂，布局GLP-1减重与代谢药物本土化产能，累计在华投资近60亿美元。", "url": "https://www.21jingji.com/article/20260323/herald/82a6eaf862e9baccbd6ccc8a83f91485.html"},
+            {"name": "罗氏", "country": "瑞士", "dynamic": "投资20.4亿元在张江建中国第二个创新药生产基地（眼科药物），苏州诊断工厂扩建为亚太最重要生产基地。", "url": "https://www.21jingji.com/article/20260323/herald/82a6eaf862e9baccbd6ccc8a83f91485.html"},
+            {"name": "赛诺菲", "country": "法国", "dynamic": "北京亦庄10亿欧元胰岛素原料药基地开工（在华最大单笔投资），上海研发中心升级为最大转化医学研究中心。", "url": "https://www.21jingji.com/article/20260323/herald/82a6eaf862e9baccbd6ccc8a83f91485.html"},
+        ],
+    },
+    "新一代信息通信": {
+        "analysis": "6G进入标准前夜、AI原生网络成产业共识。爱立信、诺基亚、高通、三星等在华深度参与6G研发与标准制定，MWC2026集中展示太赫兹、智能超表面（RIS）、通感一体（ISAC）等方向。南京可布局6G试验网、通信芯片设计、AI网络（自智网络）与卫星互联网配套，依托紫金山实验室等载体争取外企联合研发与试验场景合作。",
+        "companies": [
+            {"name": "高通", "country": "美国", "dynamic": "MWC2026发布AI原生新一代连接与终端平台，展示AI原生6G架构（太赫兹、RIS、ISAC、数字孪生网络）。", "url": "https://www.toutiao.com/article/7613521933497385512"},
+            {"name": "爱立信", "country": "瑞典", "dynamic": "提出Intelligent Fabric智能织网理念，强调下一代网络需具备感知、预测、决策、执行全链路AI能力，参与6G通感一体验证。", "url": "https://www.toutiao.com/article/7613521933497385512"},
+            {"name": "诺基亚", "country": "芬兰", "dynamic": "强化AI在RAN与核心网中的自动化价值，聚焦自优化、自愈合、节能降耗，帮助运营商提升ROI。", "url": "https://www.toutiao.com/article/7613521933497385512"},
+            {"name": "三星", "country": "韩国", "dynamic": "展示6G在超高速率、超低时延、通感融合方面的潜力，围绕沉浸式通信与全域无缝覆盖布局。", "url": "https://www.toutiao.com/article/7613521933497385512"},
+        ],
+    },
+}
 
 def enrich_items():
     out = []
@@ -271,6 +342,7 @@ def main():
         "industries": INDUSTRIES,
         "items": items,
         "policies": policies,
+        "industry_intel": INDUSTRY_INTEL,
     }
     here = os.path.dirname(os.path.abspath(__file__))
     out_path = os.path.join(here, "data.json")
@@ -288,6 +360,7 @@ def main():
     print(f"  投资/考察动态: {len(items)} 条 (投资 {sum(1 for x in items if x['category']=='investment')} / 考察经贸 {sum(1 for x in items if x['category']=='exchange')})")
     print(f"  其中 江苏相关: {sum(1 for x in items if x['is_jiangsu'])} 条, 南京相关: {sum(1 for x in items if x['is_nanjing'])} 条")
     print(f"  政策文件: {len(policies)} 条 (国家级 {sum(1 for x in policies if x['level']=='国家级')} / 省级 {sum(1 for x in policies if x['level']=='省级')} / 市级 {sum(1 for x in policies if x['level']=='市级')} / 区级 {sum(1 for x in policies if x['level']=='区级')})")
+    print(f"  四大产业情报: {len(INDUSTRY_INTEL)} 个产业 (头部跨国公司合计 {sum(len(v['companies']) for v in INDUSTRY_INTEL.values())} 家)")
 
 if __name__ == "__main__":
     main()
