@@ -27,9 +27,13 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: 运行爬虫抓取最新动态
+      - name: 运行爬虫抓取最新动态（写入 auto_items.json 增量）
         run: |
-          python crawler.py --max 20 || echo "抓取步骤出现异常，继续尝试提交已有变更"
+          python crawler.py --max 20 || echo "抓取步骤出现异常，继续尝试合并已有数据"
+
+      - name: 合并人工基线与增量，生成 data.json
+        run: |
+          python build_data.py
 
       - name: 提交并推送更新后的数据
         run: |
@@ -41,5 +45,5 @@ jobs:
           else
             git commit -m "auto: 每3小时刷新外商投资动态数据"
             git push
-            echo "已提交并推送最新数据，GitHub Pages 将自动重新发布"
+            echo "已提交并推送最新数据"
           fi
