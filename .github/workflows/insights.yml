@@ -29,7 +29,21 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: 安装依赖
+        run: pip install requests
+
       - name: 用最新数据生成 AI 研判文本（ai_insights.json）
+        # 默认走大模型（OpenAI 兼容接口，默认 DeepSeek）。
+        # 若未配置 AI_INSIGHTS_API_KEY，则自动回退到规则模式，管线不中断。
+        # —— 在仓库 Settings → Secrets and variables → Actions 中配置：
+        #   AI_INSIGHTS_API_KEY   （必填，你的 LLM Key）
+        #   AI_INSIGHTS_BASE_URL  （可选，默认 https://api.deepseek.com/v1）
+        #   AI_INSIGHTS_MODEL     （可选，默认 deepseek-chat）
+        env:
+          AI_INSIGHTS_LLM: "1"
+          AI_INSIGHTS_API_KEY: ${{ secrets.AI_INSIGHTS_API_KEY }}
+          AI_INSIGHTS_BASE_URL: ${{ secrets.AI_INSIGHTS_BASE_URL }}
+          AI_INSIGHTS_MODEL: ${{ secrets.AI_INSIGHTS_MODEL }}
         run: |
           python generate_insights.py
 
