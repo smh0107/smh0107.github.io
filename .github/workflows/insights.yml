@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: 检出仓库代码
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: 安装 Python
         uses: actions/setup-python@v5
@@ -39,6 +41,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main || true
           git add data.json data.js ai_insights.json 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "本次没有变化，跳过提交"
