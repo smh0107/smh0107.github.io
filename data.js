@@ -1,6 +1,6 @@
 /* 自动生成，请勿手改。由 build_data.py / crawler.py 生成。*/
 window.DATA = {
-  "updated_at": "2026-08-01T18:16:32",
+  "updated_at": "2026-08-02T00:32:00",
   "industries": [
     "人工智能(软件)",
     "机器人",
@@ -7701,24 +7701,6 @@ window.DATA = {
       "is_nanjing": false
     },
     {
-      "id": "auto_61e2f50057",
-      "title": "三地签约46项合作协议，深化中亚经贸合作",
-      "summary": "三地签约46项合作协议，深化中亚经贸合作",
-      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE16Snptc2ltaGszQVhoZ0NVazQ2ZTdIZGR0cEtDZGtUSWRkVzV1ZUhfQ1pRVmJvUVVSTVFKMkdXUVNhTWdjWTR0WmpmYlN5VmVSZW9DbQ?oc=5",
-      "source": "seetao.com",
-      "date": "2026-06-05",
-      "image": "",
-      "country": "跨国企业",
-      "industry": "",
-      "event_type": "投资落地",
-      "category": "investment",
-      "region": "全国",
-      "province": "",
-      "city": "",
-      "is_jiangsu": false,
-      "is_nanjing": false
-    },
-    {
       "title": "横琴粤澳深度合作区澳资企业突破8000户",
       "summary": "截至2026年6月2日，横琴粤澳深度合作区实有澳资企业数量突破8000户，占合作区企业总数的15.9%，平均每6家企业中就有1家具有澳门基因。",
       "url": "https://news.cnr.cn/native/gd/20260604/t20260604_527648283.shtml",
@@ -9011,6 +8993,24 @@ window.DATA = {
       "id": "inv093",
       "category": "investment",
       "is_jiangsu": false,
+      "is_nanjing": false,
+      "image": ""
+    },
+    {
+      "title": "罗氏诊断苏州工业园新建项目投资30亿元",
+      "summary": "罗氏诊断在苏州工业园新建项目投资30亿元，预计2028年建成投产，是其在华扩大本地化生产的重要布局。",
+      "url": "https://news.cctv.com/2026/03/19/ARTIsqd3olxNn8Xbd4VmCg0L260319.shtml",
+      "source": "央视网",
+      "country": "瑞士",
+      "industry": "生物医药",
+      "event_type": "投资落地",
+      "region": "江苏省",
+      "province": "江苏省",
+      "city": "苏州市",
+      "date": "2026-03-19",
+      "id": "inv006",
+      "category": "investment",
+      "is_jiangsu": true,
       "is_nanjing": false,
       "image": ""
     }
