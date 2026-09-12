@@ -1,6 +1,6 @@
 /* 自动生成，请勿手改。由 build_data.py / crawler.py 生成。*/
 window.DATA = {
-  "updated_at": "2026-09-11T22:55:56",
+  "updated_at": "2026-09-12T02:26:25",
   "industries": [
     "人工智能(软件)",
     "机器人",
